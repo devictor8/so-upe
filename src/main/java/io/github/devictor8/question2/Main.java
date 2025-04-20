@@ -4,7 +4,7 @@ package io.github.devictor8.question2;
 public class Main {
     private static final int T = 20;
     private static final String password = "1020217890";
-    static volatile boolean found = false;
+    static boolean found = false;
     public static void main(String[] args) {
         final long range = (long) Math.pow(10, 10) / T;
 
