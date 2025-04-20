@@ -1,22 +1,27 @@
 package io.github.devictor8.question2;
 
+
 public class Main {
-    private static final int T = 1000;
-    private static final String password = "1.234.567.890";
+    private static final int T = 20;
+    private static final String password = "1020217890";
+    static volatile boolean found = false;
     public static void main(String[] args) {
-        final double range = Math.ceil((double) 9999999999L / T);
+        final long range = (long) Math.pow(10, 10) / T;
 
         for (int i = 0; i < T; i++) {
             final int index = i;
             new Thread(() -> {
-                double init = range * index;
-                double end = init + range;
+                long init = range * index;
+                long end = init + range;
 
-                for (double j = init; j < end; j++) {
-                    String test_pass = String.format("%.0f", j);
+                for (long j = init; j < end; j++) {
+                    if (found) return;
+
+                    String test_pass = String.format("%010d", j);
                     if (test_pass.equals(password)) {
                         System.out.println("senha encontrada: " + test_pass);
                         System.out.println("Thread: " + index);
+                        found = true;
                         return;
                     }
                 }
